@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IELTS Reading Interactive Workbook</title>
+    <style>
+        :root { --primary: #13a62e; --bg: #e5f6e9; --hl-color: #90ee90; }
+        body { font-family: 'Segoe UI', sans-serif; background: var(--bg); margin: 0; padding: 0; }
+        header { background: var(--primary); color: white; padding: 15px; text-align: center; position: sticky; top: 0; z-index: 1000; }
+        .user-status { background: white; padding: 15px; text-align: center; border-bottom: 3px solid var(--primary); position: sticky; top: 60px; z-index: 999; }
+        #result-summary { margin-top: 10px; font-weight: bold; color: #d35400; font-size: 1.2rem; display: none; }
+        .container { display: grid; grid-template-columns: 300px 1fr; gap: 20px; padding: 20px; max-width: 1700px; margin: auto; }
+        .sidebar { background: white; padding: 15px; border-radius: 8px; height: fit-content; position: sticky; top: 180px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+        #vocab-display { border: 2px dashed var(--primary); min-height: 100px; padding: 10px; margin: 10px 0; border-radius: 6px; }
+        .exercise-block { display: grid; grid-template-columns: 1.2fr 1fr; gap: 30px; background: white; margin-bottom: 30px; padding: 25px; border-radius: 12px; border-bottom: 4px solid #ccc; align-items: start; }
+        .reading-section { line-height: 1.8; font-size: 1.1rem; text-align: justify; border-right: 1px solid #eee; padding-right: 20px; }
+        .hl-active { background-color: var(--hl-color); cursor: pointer; }
+        .options label { display: block; margin: 8px 0; cursor: pointer; }
+        .feedback { display: none; font-weight: bold; margin-top: 5px; }
+        .explanation { display: none; background: #fff3cd; padding: 10px; margin-top: 10px; border-left: 4px solid #ffc107; font-size: 0.9rem; }
+        .btn-submit { background: var(--primary); color: white; border: none; padding: 15px 50px; font-size: 1.2rem; border-radius: 30px; cursor: pointer; display: block; margin: 40px auto; }
+        input[type="text"] { padding: 10px; width: 280px; border-radius: 6px; border: 1px solid #ccc; }
+        .speaker-btn { background: none; border: none; cursor: pointer; font-size: 1.2rem; vertical-align: middle; padding: 0 5px; }
+        .voice-select { width: 100%; padding: 5px; border-radius: 4px; margin-bottom: 10px; border: 1px solid #ccc; font-size: 0.85rem; }
+    </style>
+</head>
+<body>
+
+<header><h1>IELTS READING: IDENTIFICATION ADVANCED</h1></header>
+
+<div class="user-status">
+    Họ và Tên học sinh: <input type="text" id="studentName" placeholder="Nhập tên của bạn...">
+    <div id="result-summary"></div>
+</div>
+
+<div class="container">
+    <div class="sidebar">
+        <h4 style="color: var(--primary); margin: 0 0 10px 0;">Selected Vocab</h4>
+        <select id="voice-select" class="voice-select">
+            <option value="en-US">Giọng Mỹ (US Accent)</option>
+            <option value="en-GB">Giọng Anh (UK Accent)</option>
+        </select>
+        <div id="vocab-display"><i>Nhấp đúp vào 1 từ để dịch...</i></div>
+        <button onclick="copyVocabList()" style="width: 100%; cursor: pointer; padding: 8px; margin-top: 5px;">Copy Danh sách từ</button>
+        <ul id="vocab-history" style="font-size: 0.85rem; padding-left: 20px; margin-top: 15px;"></ul>
+    </div>
+
+    <div class="content-area">
+        <div class="exercise-block">
+            <div class="reading-section">
+                <h4 style="color: var(--primary)">European Transport Systems 1990-2010 (1)</h4>
+                It is difficult to conceive of vigorous economic growth without an efficient transport system. Although modern information technologies can reduce the demand for physical transport by facilitating teleworking and teleservices, the requirement for transport continues to increase. There are two key factors behind this trend. For passenger transport, the determining factor is the spectacular growth in car use. The number of cars on European Union (EU) roads saw an increase of three million cars each year from 1990 to 2010, and in the next decade the EU will see a further substantial increase in its fleet.
+            </div>
+            <div class="question-section">
+                <div class="q-item" data-ans="T" data-expl="Trích: 'Although modern information technologies can reduce the demand... the requirement for transport continues to increase.' -> Dịch: Mặc dù công nghệ thông tin hiện đại có thể giảm nhu cầu... nhưng yêu cầu về vận tải vẫn tiếp tục tăng lên.">
+                    <p><b>Q1:</b> The need for transport is growing, despite technological developments.</p>
+                    <div class="options">
+                        <label><input type="radio" name="q1" value="T"> TRUE</label>
+                        <label><input type="radio" name="q1" value="F"> FALSE</label>
+                        <label><input type="radio" name="q1" value="NG"> NOT GIVEN</label>
+                    </div>
+                    <div class="feedback"></div><div class="explanation"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="exercise-block">
+            <div class="reading-section">
+                <h4 style="color: var(--primary)">European Transport Systems 1990-2010 (2)</h4>
+                As far as goods transport is concerned, growth is due to a large extent to changes in the European economy and its system of production. In the last 20 years, as internal frontiers have been abolished, the EU has moved from a ‘stock’ economy to a ‘flow’ economy. This phenomenon has been emphasised by the relocation of some industries, particularly those which are labour intensive, to reduce production costs, even though the production site is hundreds or even thousands of kilometres away from the final assembly plant or away from users.
+            </div>
+            <div class="question-section">
+                <div class="q-item" data-ans="F" data-expl="Trích: '...the production site is hundreds or even thousands of kilometres away from the final assembly plant or away from users.' -> Dịch: Nơi sản xuất nằm cách xa hàng trăm hoặc thậm chí hàng ngàn km so với nhà máy lắp ráp cuối cùng hoặc cách xa người dùng.">
+                    <p><b>Q2:</b> To reduce production costs, some industries have been moved closer to their relevant consumers.</p>
+                    <div class="options">
+                        <label><input type="radio" name="q2" value="T"> TRUE</label>
+                        <label><input type="radio" name="q2" value="F"> FALSE</label>
+                        <label><input type="radio" name="q2" value="NG"> NOT GIVEN</label>
+                    </div>
+                    <div class="feedback"></div><div class="explanation"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="exercise-block">
+            <div class="reading-section">
+                <h4 style="color: var(--primary)">European Transport Systems 1990-2010 (3)</h4>
+                The strong economic growth expected in countries which are candidates for entry to the EU will also increase transport flows, in particular road haulage traffic. In 1998, some of these countries already exported more than twice their 1990 volumes and imported more than five times their 1990 volumes. And although many candidate countries inherited a transport system which encourages rail, the distribution between modes has tipped sharply in favour of road transport since the 1990s. Between 1990 and 1998, road haulage increased by 19.4%, while during the same period rail haulage decreased by 43.5%, although – and this could benefit the enlarged EU – it is still on average at a much higher level than in existing member states.
+            </div>
+            <div class="question-section">
+                <div class="q-item" data-ans="NG" data-expl="Trích: (Không có thông tin trong bài về giá cả xe hơi). -> Dịch: Bài đọc không đề cập đến việc xe hơi đắt đỏ ở các nước ứng viên.">
+                    <p><b>Q3:</b> Cars are prohibitively expensive in some EU candidate countries.</p>
+                    <div class="options">
+                        <label><input type="radio" name="q3" value="T"> TRUE</label>
+                        <label><input type="radio" name="q3" value="F"> FALSE</label>
+                        <label><input type="radio" name="q3" value="NG"> NOT GIVEN</label>
+                    </div>
+                    <div class="feedback"></div><div class="explanation"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="exercise-block">
+            <div class="reading-section">
+                <h4 style="color: var(--primary)">European Transport Systems 1990-2010 (4)</h4>
+                However, a new imperative-sustainable development – offers an opportunity for adapting the EU’s common transport policy. This objective, agreed by the Gothenburg European Council, has to be achieved by integrating environmental considerations into Community policies, and shifting the balance between modes of transport lies at the heart of its strategy. The ambitious objective can only be fully achieved by 2020, but proposed measures are nonetheless a first essential step towards a sustainable transport system which will ideally be in place in 30 years’ time, that is by 2040.
+            </div>
+            <div class="question-section">
+                <div class="q-item" data-ans="NG" data-expl="Trích: '...sustainable transport system which will ideally be in place in 30 years’ time...' -> Dịch: Hệ thống vận tải bền vững lý tưởng sẽ đi vào hoạt động trong 30 năm tới (tính từ thời điểm viết).">
+                    <p><b>Q4:</b> The Gothenburg European Council was set up 30 years ago.</p>
+                    <div class="options">
+                        <label><input type="radio" name="q4" value="T"> TRUE</label>
+                        <label><input type="radio" name="q4" value="F"> FALSE</label>
+                        <label><input type="radio" name="q4" value="NG"> NOT GIVEN</label>
+                    </div>
+                    <div class="feedback"></div><div class="explanation"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="exercise-block">
+            <div class="reading-section">
+                <h4 style="color: var(--primary)">European Transport Systems 1990-2010 (5)</h4>
+                In 1998, energy consumption in the transport sector was to blame for 28% of emissions of CO2, the leading greenhouse gas. According to the latest estimates, if nothing is done to reverse the traffic growth trend, CO2 emissions from transport can be expected to increase by around 50% to 1,113 billion tonnes by 2020, compared with the 739 billion tonnes recorded in 1990. Once again, road transport is the main culprit since it alone accounts for 84% of the CO2 emissions attributable to transport. Using alternative fuels and improving energy efficiency is thus both an ecological necessity and a technological challenge.
+            </div>
+            <div class="question-section">
+                <div class="q-item" data-ans="F" data-expl="Trích: '...increase... to 1,113 billion tonnes by 2020, compared with the 739 billion tonnes recorded in 1990.' -> Dịch: Lượng khí thải dự kiến tăng lên 1,113 tỷ tấn vào năm 2020, so với con số 739 tỷ tấn ghi nhận năm 1990.">
+                    <p><b>Q5:</b> By the end of this decade, CO2 emissions from transport are predicted to reach 739 billion tonnes.</p>
+                    <div class="options">
+                        <label><input type="radio" name="q5" value="T"> TRUE</label>
+                        <label><input type="radio" name="q5" value="F"> FALSE</label>
+                        <label><input type="radio" name="q5" value="NG"> NOT GIVEN</label>
+                    </div>
+                    <div class="feedback"></div><div class="explanation"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="exercise-block">
+            <div class="reading-section">
+                <h4 style="color: var(--primary)">Stepwells</h4>
+                Unique to the region, stepwells are often architecturally complex and vary widely in size and shape. During their heyday, they were places of gathering, of leisure, of relaxation and of worship for villagers of all but the lowest castes. Most stepwells are found dotted around the desert areas of Gujarat (where they are called vav) and Rajasthan (where they are known as baori), while a few also survive in Delhi. Some were located in or near villages as public spaces for the community; others were positioned beside roads as resting places for travellers.
+                <br><br>As their name suggests, stepwells comprise a series of stone steps descending from ground level to the water source (normally an underground aquifer) as it recedes following the rains. When the water level was high, the user needed only to descend a few steps to reach it; when it was low, several levels would have to be negotiated.
+                <br><br>Some wells are vast, open craters with hundreds of steps paving each sloping side, often in tiers. Others are more elaborate, with long stepped passages leading to the water via several storeys. Built from stone and supported by pillars, they also included pavilions that sheltered visitors from the relentless heat. But perhaps the most impressive features are the intricate decorative sculptures that embellish many stepwells, showing activities from fighting and dancing to everyday acts such as women combing their hair and churning butter.
+            </div>
+            <div class="question-section">
+                <div class="q-item" data-ans="T" data-expl="Trích: '...they were places of gathering, of leisure, of relaxation and of worship...' -> Dịch: Chúng là nơi tụ họp, giải trí, thư giãn và thờ cúng.">
+                    <p><b>Q6:</b> Stepwells had a range of functions, in addition to those related to water collection.</p>
+                    <div class="options">
+                        <label><input type="radio" name="q6" value="T"> TRUE</label>
+                        <label><input type="radio" name="q6" value="F"> FALSE</label>
+                        <label><input type="radio" name="q6" value="NG"> NOT GIVEN</label>
+                    </div>
+                    <div class="feedback"></div><div class="explanation"></div>
+                </div>
+                <div class="q-item" data-ans="F" data-expl="Trích: 'Unique to the region...' -> Dịch: Đặc thù (Duy nhất) đối với khu vực này (không phải toàn thế giới).">
+                    <p><b>Q7:</b> Examples of an ancient stepwells can be found all over the world.</p>
+                    <div class="options">
+                        <label><input type="radio" name="q7" value="T"> TRUE</label>
+                        <label><input type="radio" name="q7" value="F"> FALSE</label>
+                        <label><input type="radio" name="q7" value="NG"> NOT GIVEN</label>
+                    </div>
+                    <div class="feedback"></div><div class="explanation"></div>
+                </div>
+                <div class="q-item" data-ans="NG" data-expl="Trích: (Không có sự so sánh về mức độ hấp dẫn). -> Dịch: Bài không so sánh vẻ đẹp của giếng ở Delhi với nơi khác.">
+                    <p><b>Q8:</b> The few existing stepwells in Delhi are more attractive than those found elsewhere.</p>
+                    <div class="options">
+                        <label><input type="radio" name="q8" value="T"> TRUE</label>
+                        <label><input type="radio" name="q8" value="F"> FALSE</label>
+                        <label><input type="radio" name="q8" value="NG"> NOT GIVEN</label>
+                    </div>
+                    <div class="feedback"></div><div class="explanation"></div>
+                </div>
+                <div class="q-item" data-ans="T" data-expl="Trích: '...water source... as it recedes following the rains.' -> Dịch: Nguồn nước rút đi sau những cơn mưa (làm số bậc thang thay đổi).">
+                    <p><b>Q9:</b> The number of steps above the water level in a stepwell altered during the course of a year.</p>
+                    <div class="options">
+                        <label><input type="radio" name="q9" value="T"> TRUE</label>
+                        <label><input type="radio" name="q9" value="F"> FALSE</label>
+                        <label><input type="radio" name="q9" value="NG"> NOT GIVEN</label>
+                    </div>
+                    <div class="feedback"></div><div class="explanation"></div>
+                </div>
+                <div class="q-item" data-ans="NG" data-expl="Trích: (Không nhắc đến thời gian xây dựng). -> Dịch: Bài đọc không nói về việc công nhân mất bao nhiêu năm để xây dựng.">
+                    <p><b>Q10:</b> It took workers many years to build the stone steps characteristic of stepwells.</p>
+                    <div class="options">
+                        <label><input type="radio" name="q10" value="T"> TRUE</label>
+                        <label><input type="radio" name="q10" value="F"> FALSE</label>
+                        <label><input type="radio" name="q10" value="NG"> NOT GIVEN</label>
+                    </div>
+                    <div class="feedback"></div><div class="explanation"></div>
+                </div>
+            </div>
+        </div>
+
+        <button type="button" class="btn-submit" onclick="gradeExam()">SUBMIT</button>
+    </div>
+</div>
+
+<script>
+    // Logic Highlight: Bôi đen để highlight
+    document.addEventListener('mouseup', function(e) {
+        let sel = window.getSelection();
+        let text = sel.toString().trim();
+        if (text.length > 0 && (text.includes(' ') || text.length > 15)) {
+            let range = sel.getRangeAt(0);
+            let span = document.createElement('span');
+            span.className = 'hl-active';
+            span.ondblclick = function(ev) {
+                ev.stopPropagation();
+                this.replaceWith(...this.childNodes);
+            };
+            range.surroundContents(span);
+            sel.removeAllRanges();
+        }
+    });
+
+    // Tra từ khi nhấp đúp (Chỉ từ đơn)
+    document.addEventListener('dblclick', function(e) {
+        if (e.target.className === 'hl-active' || e.target.className === 'speaker-btn') return; 
+        let word = window.getSelection().toString().trim();
+        if (word && !word.includes(' ') && word.length < 20) {
+            lookupWord(word);
+        }
+    });
+
+    async function lookupWord(word) {
+        const box = document.getElementById('vocab-display');
+        const hist = document.getElementById('vocab-history');
+        box.innerHTML = "Đang tra...";
+        try {
+            const res = await fetch(`https://api.mymemory.translated.net/get?q=${word}&langpair=en|vi`);
+            const data = await res.json();
+            const trans = data.responseData.translatedText;
+            box.innerHTML = `<strong>${word}</strong>: ${trans} <button class="speaker-btn" onclick="playAudio('${word}')">🔊</button>`;
+            hist.innerHTML += `<li><b>${word}</b>: ${trans} <button class="speaker-btn" onclick="playAudio('${word}')">🔊</button></li>`;
+        } catch (e) { box.innerHTML = "Lỗi dịch."; }
+    }
+
+    function playAudio(text) {
+        const accent = document.getElementById('voice-select').value;
+        const utter = new SpeechSynthesisUtterance(text);
+        utter.lang = accent;
+        window.speechSynthesis.speak(utter);
+    }
+
+    function gradeExam() {
+        const name = document.getElementById('studentName').value.trim();
+        if (!name) return alert("Vui lòng nhập tên!");
+        let score = 0;
+        const questions = document.querySelectorAll('.q-item');
+        questions.forEach(q => {
+            const ans = q.getAttribute('data-ans');
+            const selected = q.querySelector('input:checked');
+            const fb = q.querySelector('.feedback');
+            const exp = q.querySelector('.explanation');
+            fb.style.display = "block";
+            exp.style.display = "block";
+            exp.innerHTML = q.getAttribute('data-expl');
+            if (selected && selected.value === ans) {
+                score++;
+                fb.innerHTML = "✔ ĐÚNG";
+                fb.style.color = "green";
+            } else {
+                fb.innerHTML = `✘ SAI (Đáp án: ${ans})`;
+                fb.style.color = "red";
+            }
+        });
+        const res = document.getElementById('result-summary');
+        res.style.display = "block";
+        res.innerHTML = `Học sinh: ${name} . Đạt ${score}/${questions.length} câu đúng.`;
+        
+        // --- PHẦN CODE THÊM MỚI ĐỂ GỬI DỮ LIỆU ---
+        sendToGoogleSheet(name, `${score}/${questions.length}`);
+        // ----------------------------------------
+
+        window.scrollTo({top: 0, behavior: 'smooth'});
+    }
+
+    function copyVocabList() {
+        const text = document.getElementById('vocab-history').innerText;
+        navigator.clipboard.writeText(text);
+        alert("Đã lưu danh sách từ vựng!");
+    }
+
+    // --- FUNCTION THÊM MỚI ĐỂ KẾT NỐI GOOGLE SHEETS ---
+    function sendToGoogleSheet(studentName, totalScore) {
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbyDJ5ORzBODZf_tjLV0ahC7OTuIKVSaf3wasjfjdrCCIC2jNJY1ZQ2z5GADS6wookXP/exec';
+        
+        // Lấy toàn bộ nội dung HTML phần kết quả (bao gồm feedback và giải thích)
+        const detailedContent = document.querySelector('.content-area').innerHTML;
+
+        const data = {
+            studentName: studentName,
+            totalScore: totalScore,
+            detailedAnswers: detailedContent
+        };
+
+        fetch(scriptURL, {
+            method: 'POST',
+            mode: 'no-cors', // Sử dụng no-cors để tránh lỗi chính sách bảo mật trình duyệt
+            cache: 'no-cache',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        })
+        .then(() => {
+            alert("Nộp bài thành công!");
+        })
+        .catch(error => {
+            console.error('Error!', error.message);
+            alert("Nộp bài không thành công, vui lòng thử lại.");
+        });
+    }
+    // ------------------------------------------------
+</script>
+</body>
+</html>
